@@ -12,8 +12,8 @@
 
 @property (nonatomic) NSInteger value;
 @property (nonatomic) BOOL disable;
-@property (nonatomic) BOOL wrongValue;
-@property (nonatomic) NSInteger counter;
+@property (nonatomic, readonly) BOOL wrongValue;
 
+- (void)markWrongValue:(BOOL)wrongValue;
 
 @end

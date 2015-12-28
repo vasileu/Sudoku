@@ -15,6 +15,8 @@
 
 @end
 
+static const NSInteger DIMENSION = 9;
+static const NSInteger AREA_DIMENSION = 3;
 
 @implementation BNRBoardView
 
@@ -38,8 +40,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    CGFloat cellHeight = self.bounds.size.height / 9.001;
-    CGFloat cellWidth = self.bounds.size.width / 9.001;
+    CGFloat cellHeight = self.bounds.size.height / DIMENSION;
+    CGFloat cellWidth = self.bounds.size.width / DIMENSION;
     UIBezierPath *cellRect = [self makeRectangleWithSize:CGSizeMake(cellWidth, cellHeight)];
     
     CGPoint topRightPoint = CGPointMake(self.bounds.size.width, 0);
@@ -51,10 +53,10 @@
     [[UIColor blackColor] setStroke];
         
     //Horizontal lines
-    [self stokePath:horizontalLine repeat:10 withTranslation:CGPointMake(0, cellHeight)];
+    [self stokePath:horizontalLine repeat:DIMENSION+1 withTranslation:CGPointMake(0, cellHeight)];
     
     //Vertical lines
-    [self stokePath:verticalLine repeat:10 withTranslation:CGPointMake(cellWidth, 0)];
+    [self stokePath:verticalLine repeat:DIMENSION+1 withTranslation:CGPointMake(cellWidth, 0)];
     
     
         
@@ -64,8 +66,8 @@
     int cellNumber = 0;
     for (BNRCell* cell in self.cellArray) {
         if (cell.value != 0) {
-            int cellCol = cellNumber % 9;
-            int cellRow = cellNumber / 9;        
+            int cellCol = cellNumber % DIMENSION;
+            int cellRow = cellNumber / DIMENSION;        
             NSString *value = [NSString stringWithFormat:@"%d",cell.value];
         
             [[UIColor blackColor] setFill];
@@ -125,8 +127,8 @@
     
     CGContextSaveGState(context);
     for (int i = 0; i < times; i++) {
-        if (i % 3 == 0) {
-            path.lineWidth = 3;
+        if (i % AREA_DIMENSION == 0) {
+            path.lineWidth = AREA_DIMENSION;
         }
         else {
             path.lineWidth = 1;
@@ -162,13 +164,13 @@
 
 - (NSInteger)selectedCell
 {
-    CGFloat cellHeight = self.bounds.size.height / 9.001;
-    CGFloat cellWidth = self.bounds.size.width / 9.001;
+    CGFloat cellHeight = self.bounds.size.height / DIMENSION;
+    CGFloat cellWidth = self.bounds.size.width / DIMENSION;
     
     int selectedCellCol = self.lastTapPoint.x / cellWidth;
     int selectedCellRow = self.lastTapPoint.y / cellHeight;
     
-    return selectedCellRow * 9 + selectedCellCol;
+    return selectedCellRow * DIMENSION + selectedCellCol;
 }
 
 - (id)initWithFrame:(CGRect)frame

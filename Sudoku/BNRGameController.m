@@ -237,26 +237,26 @@ static int linearIndex(int row, int column)
     if (cellIndex != move.cellNumber) {
         if (cellToChange.value == 0){
             if (cell.value == move.value){
-                cell.wrongValue = YES;
-                cellToChange.wrongValue = YES;
+                [cell markWrongValue:YES];
+                [cellToChange markWrongValue:YES];
             }
             return;
         }
         if (move.value == 0){
             if (cellToChange.value == cell.value) {
-                cell.wrongValue = NO;
-                cellToChange.wrongValue = NO;
+                [cell markWrongValue:NO];
+                [cellToChange markWrongValue:NO];
             }
             return;
         }
         if (cell.value != 0) {
             if (cellToChange.value == cell.value) {
-                cell.wrongValue = NO;
-                cellToChange.wrongValue = NO;
+                [cell markWrongValue:NO];
+                [cellToChange markWrongValue:NO];
             }
             if (move.value == cell.value) {
-                cell.wrongValue = YES;
-                cellToChange.wrongValue = YES;
+                [cell markWrongValue:YES];
+                [cellToChange markWrongValue:YES];
             }
         }        
     }       

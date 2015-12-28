@@ -10,6 +10,8 @@
 
 @interface BNRCell ()
 
+@property (nonatomic) NSInteger counter;
+
 @end
 
 @implementation BNRCell
@@ -20,7 +22,7 @@
     return (self.counter > 0);
 }
 
-- (void)setWrongValue:(BOOL)wrongValue
+- (void)markWrongValue:(BOOL)wrongValue
 {
     if (wrongValue) {
         self.counter++;
